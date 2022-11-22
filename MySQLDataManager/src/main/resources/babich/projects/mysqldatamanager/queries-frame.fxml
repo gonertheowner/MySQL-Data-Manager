@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="babich.projects.mysqldatamanager.QueriesFrameController">
+   <children>
+      <Text layoutX="349.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Запросы на выборку">
+         <font>
+            <Font size="21.0" />
+         </font>
+      </Text>
+      <Text layoutX="56.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Без параметров:">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Text>
+      <ListView fx:id="resultField" layoutX="57.0" layoutY="263.0" prefHeight="509.0" prefWidth="796.0" />
+      <Button fx:id="queryButton1" layoutX="56.0" layoutY="79.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="239.0" text="ФИО поставщика максимальной длины" />
+      <Button fx:id="queryButton2" layoutX="308.0" layoutY="79.0" mnemonicParsing="false" text="Названия заводов, отсортированные по алфавиту" />
+      <Button fx:id="queryButton3" layoutX="612.0" layoutY="79.0" mnemonicParsing="false" text="Средний вес деталей" />
+      <Text layoutX="56.0" layoutY="137.0" strokeType="OUTSIDE" strokeWidth="0.0" text="С параметрами:">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Text>
+      <Button fx:id="backToMenuButton" layoutX="56.0" layoutY="786.0" mnemonicParsing="false" text="Вернуться в меню" />
+      <Button fx:id="queryButton4" layoutX="56.0" layoutY="155.0" mnemonicParsing="false" text="Изделия с весом больше, чем:" />
+      <TextField fx:id="parameterField" layoutX="54.0" layoutY="217.0" prefHeight="25.0" prefWidth="184.0" />
+      <Text layoutX="54.0" layoutY="213.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Параметр:" />
+      <Button fx:id="queryButton5" layoutX="251.0" layoutY="155.0" mnemonicParsing="false" text="Детали с размерами меньше, чем" />
+      <Button fx:id="queryButton6" layoutX="465.0" layoutY="155.0" mnemonicParsing="false" text="ФИО начальника отдела с длинной, равной:" />
+   </children>
+</AnchorPane>

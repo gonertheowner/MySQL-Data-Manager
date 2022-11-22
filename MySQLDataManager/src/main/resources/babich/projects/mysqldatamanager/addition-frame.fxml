@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="babich.projects.mysqldatamanager.AdditionFrameController">
+   <children>
+      <VBox layoutX="34.0" layoutY="60.0" prefHeight="146.0" prefWidth="167.0" spacing="7.0">
+         <children>
+            <RadioButton mnemonicParsing="false" text="Деталь">
+               <toggleGroup>
+                  <ToggleGroup fx:id="tables" />
+               </toggleGroup>
+            </RadioButton>
+            <RadioButton mnemonicParsing="false" text="Завод" toggleGroup="$tables" />
+            <RadioButton mnemonicParsing="false" text="Изделие" toggleGroup="$tables" />
+            <RadioButton mnemonicParsing="false" text="Отдел" toggleGroup="$tables" />
+            <RadioButton mnemonicParsing="false" text="Поставщик" toggleGroup="$tables" />
+            <RadioButton mnemonicParsing="false" text="Технология изготовления" toggleGroup="$tables" />
+         </children>
+      </VBox>
+      <Button fx:id="viewTableButton" layoutX="34.0" layoutY="218.0" mnemonicParsing="false" text="Выбрать и отобразить" />
+      <Button fx:id="additionButton" layoutX="214.0" layoutY="590.0" mnemonicParsing="false" text="Добавить" />
+      <Text layoutX="31.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Выберите таблицу:" wrappingWidth="109.009765625" />
+      <Text layoutX="391.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Добавление">
+         <font>
+            <Font size="21.0" />
+         </font>
+      </Text>
+      <ListView fx:id="resultField" layoutX="214.0" layoutY="60.0" prefHeight="440.0" prefWidth="647.0" />
+      <Text layoutX="214.0" layoutY="531.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Введите параметры строго через запятую:" wrappingWidth="321.431640625" />
+      <TextField fx:id="parametrsField" layoutX="214.0" layoutY="541.0" prefHeight="25.0" prefWidth="647.0" />
+      <Text layoutX="214.0" layoutY="579.0" strokeType="OUTSIDE" strokeWidth="0.0" text="(количество параметров должно соответствовать количеству столбцов таблицы, уменьшенному на единицу)" />
+      <Button fx:id="backToMenuButton" layoutX="291.0" layoutY="590.0" mnemonicParsing="false" text="Вернуться в меню" />
+   </children>
+</AnchorPane>

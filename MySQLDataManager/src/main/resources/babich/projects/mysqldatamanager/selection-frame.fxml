@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="babich.projects.mysqldatamanager.SelectionFrameController">
+   <children>
+      <ListView fx:id="resultField" layoutX="211.0" layoutY="63.0" prefHeight="499.0" prefWidth="637.0" />
+      <Text layoutX="35.0" layoutY="76.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Выберете таблицу:" wrappingWidth="107.7109375" />
+      <VBox fx:id="tables" layoutX="35.0" layoutY="88.0" prefHeight="141.0" prefWidth="164.0" spacing="7.0">
+         <children>
+            <RadioButton mnemonicParsing="false" text="Деталь">
+               <toggleGroup>
+                  <ToggleGroup fx:id="tableNames" />
+               </toggleGroup>
+            </RadioButton>
+            <RadioButton mnemonicParsing="false" text="Завод" toggleGroup="$tableNames" />
+            <RadioButton mnemonicParsing="false" text="Изделие" toggleGroup="$tableNames" />
+            <RadioButton mnemonicParsing="false" text="Отдел" toggleGroup="$tableNames" />
+            <RadioButton mnemonicParsing="false" text="Поставщик" toggleGroup="$tableNames" />
+            <RadioButton lineSpacing="7.0" mnemonicParsing="false" text="Технология изготовления" toggleGroup="$tableNames" />
+         </children>
+      </VBox>
+      <Text layoutX="211.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Содержимое таблицы" wrappingWidth="258.0">
+         <font>
+            <Font size="21.0" />
+         </font>
+      </Text>
+      <Button fx:id="viewButton" layoutX="211.0" layoutY="571.0" mnemonicParsing="false" text="Отобразить" />
+      <Button fx:id="goToMenuButton" layoutX="305.0" layoutY="571.0" mnemonicParsing="false" text="Выйти в меню" />
+   </children>
+</AnchorPane>
