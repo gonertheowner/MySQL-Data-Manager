@@ -4,4 +4,4 @@
 
 Задание: файл db_lab7_pin-3.pdf
 
-Использованные технологии: Java, JDBC, MySQL
+Использованные технологии: Java 18, Java FX, JDBC, MySQL
