@@ -290,11 +290,121 @@ public class DBManager {
         return items;
     }
 
-    public static ObservableList<String > update(Connection connection, String tableName, String columnNames, String parameters) {
+    public static ObservableList<String > update(Connection connection, String tableName, String id, String columnNames, String parameters) throws SQLException {
         ObservableList<String> items = FXCollections.observableArrayList();
         if (tableName == null) {
-            items.add("Пожалуйста, сначала выберете таблицу\n");
+            items.add("Пожалуйста, сначала выберете таблицу.");
             return items;
+        }
+
+        if (id.equals("")) {
+            items.add("Пожалуйста, сначала введите id");
+            return items;
+        }
+
+        if (parseStringToInteger(id) == -1) {
+            items.add("Пожалуйста, введите целое положительное число\n");
+            return items;
+        }
+
+        Statement statement;
+        try {
+            statement = connection.createStatement();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        ResultSet selectionSet = statement.executeQuery("SELECT * FROM " + getStringAfterSyntaxRules(tableName));
+        ArrayList<String> ids = new ArrayList<>();
+        while (selectionSet.next()) {
+            ids.add(selectionSet.getString(1));
+        }
+
+        if (!(ids.contains(id))) {
+            items.add("Пожалуйста, введите существующий id");
+            return items;
+        }
+
+        if (columnNames.equals("")) {
+            items.add("Пожалуйста, сначала введите имена столбцов, которые Вы бы хотели изменить");
+            return items;
+        }
+
+        try {
+            ResultSet resultSet = statement.executeQuery("SELECT * FROM " + getStringAfterSyntaxRules(tableName));
+            var metaData = resultSet.getMetaData();
+            int columnCount = metaData.getColumnCount();
+
+            String[] inputColumns = columnNames.split(",");
+
+            if (inputColumns.length > columnCount - 1) {
+                items.add("Количество введенных Вами столбцов больше, чем количество столбцов в выбранной таблице");
+                return items;
+            }
+
+            for (int i = 1; i <= inputColumns.length; i++) {
+                inputColumns[i - 1] = inputColumns[i - 1].trim();
+                if (!(inputColumns[i - 1].equals(metaData.getColumnName(i + 1)))) {
+                    items.add("Введенное имя столбца: " + inputColumns[i - 1] + " не совпадает с ожидаемым именем: " + metaData.getColumnName(i + 1));
+                    return items;
+                }
+            }
+
+            if (parameters.equals("")) {
+                items.add("Пожалуйста, сначала введите параметры");
+                return items;
+            }
+
+            String[] inputParameters = parameters.split(",");
+            for (int i = 0; i < inputParameters.length; i++) {
+                inputParameters[i] = inputParameters[i].trim();
+            }
+
+            ArrayList<Integer> dataTypes = new ArrayList<>();
+            for (int i = 2; i <= columnCount; i++) {
+                dataTypes.add(resultSet.getMetaData().getColumnType(i));
+            }
+
+            if (inputColumns.length != inputParameters.length) {
+                items.add("Количество изменяемых столбцов должно равняться количеству введенных параметров");
+                return items;
+            }
+
+            if (inputParameters.length > dataTypes.size()) {
+                items.add("Количестов параметров не должно быть больше, чем количество столбцов таблицы");
+                return items;
+            }
+
+            ArrayList<Integer> parametersDataTypes = new ArrayList<>();
+            for (String parameter : inputParameters) {
+                if (parseStringToInteger(parameter.trim()) == -1) {
+                    parametersDataTypes.add(12);
+                } else {
+                    parametersDataTypes.add(4);
+                }
+            }
+
+            for (int i = 0; i < parametersDataTypes.size(); i++) {
+                if (!(parametersDataTypes.get(i).equals(dataTypes.get(i)))) {
+                    items.add("Типы введенных параметров не совпадают с типами соответствующих столбцов таблицы");
+                    return items;
+                }
+            }
+
+            StringBuilder result = new StringBuilder();
+            result.append("UPDATE ").append(getStringAfterSyntaxRules(tableName).toLowerCase()).append(" SET ");
+            for (int i = 0; i < inputParameters.length; i++) {
+                result.append(metaData.getColumnName(i + 2)).append("='").append(inputParameters[i]).append("',");
+            }
+            result.delete(result.length() - 1, result.length());
+            result.append(" WHERE ").append(metaData.getColumnName(1)).append("='").append(id).append("'");
+            System.out.println(result);
+            connection.prepareStatement(result.toString()).execute();
+
+            items.add("Изменение прошло успешно");
+            return items;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
     }
 }

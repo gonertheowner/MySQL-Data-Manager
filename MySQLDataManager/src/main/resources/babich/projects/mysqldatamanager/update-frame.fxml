@@ -2,26 +2,46 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="babich.projects.mysqldatamanager.UpdateFrameController">
    <children>
-      <Text layoutX="390.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Обновление">
+      <Text layoutX="390.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Обновление">
          <font>
             <Font size="21.0" />
          </font>
       </Text>
-      <TextField fx:id="tableNameField" layoutX="245.0" layoutY="108.0" prefHeight="25.0" prefWidth="212.0" />
-      <TextField fx:id="columnNamesField" layoutX="245.0" layoutY="183.0" prefHeight="25.0" prefWidth="212.0" />
-      <TextField fx:id="parametersField" layoutX="245.0" layoutY="259.0" prefHeight="25.0" prefWidth="212.0" />
-      <Text layoutX="245.0" layoutY="98.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Введите имя таблицы:" />
-      <Text layoutX="245.0" layoutY="166.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Введите имена полей (через запятую):" />
-      <Text layoutX="245.0" layoutY="242.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Введите новые значения полей:" />
-      <Button fx:id="updateButton" layoutX="245.0" layoutY="307.0" mnemonicParsing="false" text="Обновить" />
-      <Button fx:id="backToMenuButton" layoutX="341.0" layoutY="307.0" mnemonicParsing="false" text="Вернуться в меню" />
-      <ListView fx:id="resultField" layoutX="497.0" layoutY="83.0" prefHeight="249.0" prefWidth="316.0" />
+      <TextField fx:id="columnNamesField" layoutX="273.0" layoutY="570.0" prefHeight="25.0" prefWidth="212.0" />
+      <TextField fx:id="parametersField" layoutX="273.0" layoutY="621.0" prefHeight="25.0" prefWidth="212.0" />
+      <Text layoutX="273.0" layoutY="563.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Введите имена полей (через запятую):" />
+      <Text layoutX="273.0" layoutY="617.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Введите новые значения полей:" />
+      <Button fx:id="updateButton" layoutX="273.0" layoutY="654.0" mnemonicParsing="false" text="Обновить" />
+      <Button fx:id="backToMenuButton" layoutX="369.0" layoutY="654.0" mnemonicParsing="false" text="Вернуться в меню" />
+      <ListView fx:id="resultField" layoutX="502.0" layoutY="499.0" prefHeight="249.0" prefWidth="307.0" />
+      <Text layoutX="273.0" layoutY="512.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Введите id записи:" />
+      <TextField fx:id="idField" layoutX="273.0" layoutY="516.0" prefHeight="25.0" prefWidth="212.0" />
+      <ListView fx:id="tableField" layoutX="273.0" layoutY="50.0" prefHeight="377.0" prefWidth="536.0" />
+      <VBox layoutX="97.0" layoutY="79.0" prefHeight="148.0" prefWidth="164.0" spacing="7.0">
+         <children>
+            <RadioButton mnemonicParsing="false" text="Деталь">
+               <toggleGroup>
+                  <ToggleGroup fx:id="tableNames" />
+               </toggleGroup>
+            </RadioButton>
+            <RadioButton mnemonicParsing="false" text="Завод" toggleGroup="$tableNames" />
+            <RadioButton mnemonicParsing="false" text="Изделие" toggleGroup="$tableNames" />
+            <RadioButton mnemonicParsing="false" text="Отдел" toggleGroup="$tableNames" />
+            <RadioButton mnemonicParsing="false" text="Поставщик" toggleGroup="$tableNames" />
+            <RadioButton mnemonicParsing="false" text="Технология изготовления" toggleGroup="$tableNames" />
+         </children>
+      </VBox>
+      <Text layoutX="97.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Выберите таблицу:" />
+      <Button fx:id="selectAndViewButton" layoutX="97.0" layoutY="226.0" mnemonicParsing="false" text="Выбрать и отобразить" />
    </children>
 </AnchorPane>
