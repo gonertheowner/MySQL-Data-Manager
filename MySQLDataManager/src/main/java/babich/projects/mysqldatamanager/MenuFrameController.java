@@ -25,6 +25,9 @@ public class MenuFrameController {
     @FXML
     private Button selectionButton;
 
+    @FXML
+    private Button updateButton;
+
     private static final Connection connection;
 
     static {
@@ -87,6 +90,20 @@ public class MenuFrameController {
         queriesButton.setOnAction(actionEvent -> {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("queries-frame.fxml"));
+
+            try {
+                loader.load();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+
+            Parent root = loader.getRoot();
+            primaryStage.setScene(new Scene(root));
+        });
+
+        updateButton.setOnAction(actionEvent -> {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("update-frame.fxml"));
 
             try {
                 loader.load();

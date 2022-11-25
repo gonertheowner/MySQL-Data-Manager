@@ -289,4 +289,12 @@ public class DBManager {
         }
         return items;
     }
+
+    public static ObservableList<String > update(Connection connection, String tableName, String columnNames, String parameters) {
+        ObservableList<String> items = FXCollections.observableArrayList();
+        if (tableName == null) {
+            items.add("Пожалуйста, сначала выберете таблицу\n");
+            return items;
+        }
+    }
 }
