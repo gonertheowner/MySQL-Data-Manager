@@ -342,10 +342,15 @@ public class DBManager {
                 return items;
             }
 
-            for (int i = 1; i <= inputColumns.length; i++) {
-                inputColumns[i - 1] = inputColumns[i - 1].trim();
-                if (!(inputColumns[i - 1].equals(metaData.getColumnName(i + 1)))) {
-                    items.add("Введенное имя столбца: " + inputColumns[i - 1] + " не совпадает с ожидаемым именем: " + metaData.getColumnName(i + 1));
+            ArrayList<String> tableColumnNames = new ArrayList<>();
+            for (int i = 1; i <= columnCount; i++) {
+                tableColumnNames.add(metaData.getColumnName(i));
+            }
+
+            for (int i = 0; i < inputColumns.length; i++) {
+                inputColumns[i] = inputColumns[i].trim();
+                if (!(tableColumnNames.contains(inputColumns[i]))) {
+                    items.add("Введенное имя столбца: " + inputColumns[i - 1] + " не совпадает ни с одним именем столбца выбранной таблицы");
                     return items;
                 }
             }
@@ -394,7 +399,7 @@ public class DBManager {
             StringBuilder result = new StringBuilder();
             result.append("UPDATE ").append(getStringAfterSyntaxRules(tableName).toLowerCase()).append(" SET ");
             for (int i = 0; i < inputParameters.length; i++) {
-                result.append(metaData.getColumnName(i + 2)).append("='").append(inputParameters[i]).append("',");
+                result.append(inputColumns[i]).append("='").append(inputParameters[i]).append("',");
             }
             result.delete(result.length() - 1, result.length());
             result.append(" WHERE ").append(metaData.getColumnName(1)).append("='").append(id).append("'");
